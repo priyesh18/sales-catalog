@@ -6,6 +6,7 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  ind=['orang','jlal','ieflja','jefna'];
 
   constructor(public navCtrl: NavController) {
 

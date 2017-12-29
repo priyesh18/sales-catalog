@@ -6,11 +6,93 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
+      <form>
+        <ion-list>
+          <ion-item-divider color="primary">
+            Company
+          </ion-item-divider>
+        
+          <ion-item>
+            <ion-label>Surya Care</ion-label>
+            <ion-checkbox></ion-checkbox>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label>Surya Siddhi</ion-label>
+            <ion-checkbox></ion-checkbox>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label>Surya Urja</ion-label>
+            <ion-checkbox ></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Surya Classic</ion-label>
+            <ion-checkbox ></ion-checkbox>
+          </ion-item>
+        </ion-list>
+
+        <ion-grid>
+            <ion-item-divider color="primary">
+                Type
+              </ion-item-divider>
+          <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label>Steel</ion-label>
+                    <ion-checkbox item-right></ion-checkbox>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Glass</ion-label>
+                <ion-checkbox item-right></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+       </ion-grid>
+
+
+       <ion-grid>
+          <ion-item-divider color="primary">
+              Subtype
+            </ion-item-divider>
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label>Single</ion-label>
+                  <ion-checkbox item-right></ion-checkbox>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Double</ion-label>
+              <ion-checkbox item-right></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      <ion-row>
+        
+            <ion-col>
+                <ion-item>
+                    <ion-label>Triple</ion-label>
+                    <ion-checkbox item-right></ion-checkbox>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Four</ion-label>
+                <ion-checkbox item-right></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+       </ion-grid>
+      
+   <button ion-button type="submit" block clear large>Filter</button>
+      </form>
+      <button ion-button block outline
+  (click)="logout()"
+  class="btn btn-primary">Logout</button>
   </ion-content>
 
 </ion-menu>

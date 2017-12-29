@@ -3,8 +3,13 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+
+import  firebase  from 'firebase';
+import { LoginPage } from '../pages/login/login';
+import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,18 +17,32 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen,
+    private userService: UserService,
+    private menuCtrl: MenuController,
+    private auth: AuthService) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
+    if (!firebase.apps.length) {
+      firebase.initializeApp({apiKey: "AIzaSyC9eYTtyWNtxxjYNJmqPWR00q6zeCjZNMQ",
+      authDomain: "triveni-b663b.firebaseapp.com",
+      databaseURL: "https://triveni-b663b.firebaseio.com",
+      projectId: "triveni-b663b",
+      storageBucket: "triveni-b663b.appspot.com",
+      messagingSenderId: "640003599792"});
+  }
+  auth.user$.subscribe(user => {
+    if (!user) return; 
+    this.rootPage = HomePage;
+    userService.save(user);
+  }) 
+   
 
   }
 
@@ -40,5 +59,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+  logout() {
+    this.auth.logout();
+    this.rootPage = LoginPage;
+    this.menuCtrl.close();
   }
 }
