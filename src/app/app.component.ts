@@ -50,7 +50,8 @@ export class MyApp implements OnInit{
   auth.user$.subscribe(user => {
     if (!user) return; 
     this.rootPage = HomePage;
-    userService.save(user);
+    console.log(user);
+    //userService.save(user);
   }) 
    
 

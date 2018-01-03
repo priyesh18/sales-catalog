@@ -1,3 +1,15 @@
 page-login {
-
+    ion-content {
+        background-image: url('../assets/loginpage.jpeg');
+        background-size: cover;
+    }
+    .item.item-input {
+        background-color: transparent;
+        color: white;
+    }
+    .card {
+        //margin-top: 100px;
+        background-color: rgba($color: darkblue, $alpha: 0.65);
+        padding: 24px;
+    }
 }

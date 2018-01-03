@@ -19,8 +19,11 @@ export class LoginPage {
   }
 
   login() { 
-    this.auth.login();
+   // this.auth.login();
   }
-  
+  onSubmit(data) {
+
+    this.auth.login(data.email,data.password,data.name);
+  }
 
 }

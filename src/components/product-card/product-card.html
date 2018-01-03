@@ -3,6 +3,6 @@
     <img [src]="product.image"/>
     <ion-card-content class="mycontent">
       {{product.id}}<br>{{product.company}}<br>{{product.type}} {{product.subtype}}<br>{{product.description}}
-      <button ion-button block>Add to order</button>
+      <button (click)="addToCart(product)" ion-button block>Add to order</button>
     </ion-card-content>
   </ion-card>

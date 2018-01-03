@@ -10,7 +10,7 @@ import firebase from 'firebase';
 
 @Injectable()
 export class AuthService {
-  user$;
+  user$: Observable<firebase.User>;
 
   constructor(
     private userService: UserService,
@@ -19,9 +19,22 @@ export class AuthService {
     this.user$ = afAuth.authState;    
   }
 
-  login() {
+  login(email: string, password: string,name: string) {
    
-    this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    //this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    this.afAuth.auth.createUserWithEmailAndPassword(email,password)
+    .then(() => {
+      this.afAuth.auth.currentUser.updateProfile({
+        displayName: name,
+        photoURL: null
+      }).then(() => {
+        this.user$.subscribe(user => {
+          this.userService.save(user);
+        } )
+        
+      })
+    })
+    
   }
 
   logout() { 
