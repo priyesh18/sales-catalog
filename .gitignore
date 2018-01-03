@@ -33,4 +33,4 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-src/environment/environment.ts
+src/environment/
