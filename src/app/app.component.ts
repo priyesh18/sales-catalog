@@ -1,41 +1,51 @@
+import { environment } from './../environment/environment';
+import { CategoryService } from './../services/category.service';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
-
-import  firebase  from 'firebase';
+import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
-import { HomePage } from '../pages/home/home';
-import { MenuController } from 'ionic-angular/components/app/menu-controller';
-
+import  firebase  from 'firebase';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import 'rxjs/add/operator/map';
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit{
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-
   pages: Array<{title: string, component: any}>;
+  companys = [];
+  types = [
+    {name: 'Steel', value: 'steel', checked: false},
+    {name: 'Glass', value: 'glass', checked: false}
+  ];
+  subtypes = [
+    {name: 'Single', value: 'single', checked: false},
+    {name: 'Double', value: 'double', checked: false},
+    {name: 'Triple', value: 'triple', checked: false},
+    {name: 'Four', value: 'four', checked: false}
+  ];
+
 
   constructor(
     public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
+    public events: Events,
     private userService: UserService,
     private menuCtrl: MenuController,
+    private categoryService: CategoryService,
     private auth: AuthService) {
     this.initializeApp();
     if (!firebase.apps.length) {
-      firebase.initializeApp({apiKey: "AIzaSyC9eYTtyWNtxxjYNJmqPWR00q6zeCjZNMQ",
-      authDomain: "triveni-b663b.firebaseapp.com",
-      databaseURL: "https://triveni-b663b.firebaseio.com",
-      projectId: "triveni-b663b",
-      storageBucket: "triveni-b663b.appspot.com",
-      messagingSenderId: "640003599792"});
+      firebase.initializeApp(environment.firebase);
   }
   auth.user$.subscribe(user => {
     if (!user) return; 
@@ -65,4 +75,27 @@ export class MyApp {
     this.rootPage = LoginPage;
     this.menuCtrl.close();
   }
+ 
+
+  onFilter() {
+  
+  this.events.publish("shareObject",
+    this.selectedOptions(this.companys),
+    this.selectedOptions(this.types),
+    this.selectedOptions(this.subtypes) );
+  }
+  selectedOptions(myarray) { 
+    return myarray
+              .filter(opt => opt.checked)
+              .map(opt => opt.value)
+  }
+  ngOnInit() {
+     this.categoryService.getAll().map((company) => {
+       company.forEach(element => {
+        this.companys.push({name: element.name, value:element.$key, checked:false});
+       });
+       console.log(this.companys);
+     }).subscribe()
+  }
+   
 }

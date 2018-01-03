@@ -6,93 +6,55 @@
   </ion-header>
 
   <ion-content>
-      <form>
-        <ion-list>
-          <ion-item-divider color="primary">
-            Company
-          </ion-item-divider>
-        
-          <ion-item>
-            <ion-label>Surya Care</ion-label>
-            <ion-checkbox></ion-checkbox>
-          </ion-item>
-        
-          <ion-item>
-            <ion-label>Surya Siddhi</ion-label>
-            <ion-checkbox></ion-checkbox>
-          </ion-item>
-        
-          <ion-item>
-            <ion-label>Surya Urja</ion-label>
-            <ion-checkbox ></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>Surya Classic</ion-label>
-            <ion-checkbox ></ion-checkbox>
-          </ion-item>
-        </ion-list>
+    <div>
+      <ion-list>
+        <ion-item-divider color="primary">
+          Company
+        </ion-item-divider>
 
-        <ion-grid>
-            <ion-item-divider color="primary">
-                Type
-              </ion-item-divider>
-          <ion-row>
-            <ion-col>
-                <ion-item>
-                    <ion-label>Steel</ion-label>
-                    <ion-checkbox item-right></ion-checkbox>
-                </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-label>Glass</ion-label>
-                <ion-checkbox item-right></ion-checkbox>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-       </ion-grid>
+        <div class="form-group">
 
+          <ion-item *ngFor="let company of companys">
+            <ion-label>{{company.name}}</ion-label>
+            <ion-checkbox name="companys" [(ngModel)]="company.checked">
+            </ion-checkbox>
+          </ion-item>
+        </div>
+      </ion-list>
 
-       <ion-grid>
-          <ion-item-divider color="primary">
-              Subtype
-            </ion-item-divider>
+      <ion-grid>
+        <ion-item-divider color="primary">
+          Type
+        </ion-item-divider>
         <ion-row>
-          <ion-col>
-              <ion-item>
-                  <ion-label>Single</ion-label>
-                  <ion-checkbox item-right></ion-checkbox>
-              </ion-item>
-          </ion-col>
-          <ion-col>
+          <ion-col *ngFor="let type of types" >
             <ion-item>
-              <ion-label>Double</ion-label>
-              <ion-checkbox item-right></ion-checkbox>
+              <ion-label>{{type.name}}</ion-label>
+              <ion-checkbox item-right name="types" [(ngModel)]="type.checked" ></ion-checkbox>
             </ion-item>
           </ion-col>
         </ion-row>
-      <ion-row>
-        
-            <ion-col>
-                <ion-item>
-                    <ion-label>Triple</ion-label>
-                    <ion-checkbox item-right></ion-checkbox>
-                </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-label>Four</ion-label>
-                <ion-checkbox item-right></ion-checkbox>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-       </ion-grid>
-      
-   <button ion-button type="submit" block clear large>Filter</button>
-      </form>
-      <button ion-button block outline
-  (click)="logout()"
-  class="btn btn-primary">Logout</button>
+      </ion-grid>
+     
+
+      <ion-grid>
+        <ion-item-divider color="primary">
+          Subtype
+        </ion-item-divider>
+        <ion-row>
+          <ion-col *ngFor="let subtype of subtypes">
+            <ion-item>
+              <ion-label>{{subtype.name}}</ion-label>
+              <ion-checkbox item-right [(ngModel)]="subtype.checked" name="subtype"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+      <button ion-button type="button" (click)="onFilter()" block clear large>Filter</button>
+    </div>
+    <button ion-button block outline (click)="logout()" class="btn btn-primary">Logout</button>
   </ion-content>
 
 </ion-menu>

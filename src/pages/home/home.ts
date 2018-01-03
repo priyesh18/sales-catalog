@@ -1,15 +1,38 @@
+import { Product } from './../../models/product.model';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
+import { ProductService } from '../../services/product.service';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
-  ind=['orang','jlal','ieflja','jefna'];
-
-  constructor(public navCtrl: NavController) {
+export class HomePage implements OnInit {
+  
+  private allProducts: Product[] = [];
+  private filteredProducts: Product[] = [];
+  constructor(
+    public navCtrl: NavController,
+    private productService: ProductService,
+    private events: Events
+  ) {
 
   }
+  ngOnInit() {
+    this.productService.getAll().subscribe(products => {
+      this.allProducts = products;
+      this.filteredProducts = products;
+    })
+    this.events.subscribe('shareObject', (companys,types,subtypes) => {
+      console.log(companys,types,subtypes);
+  });  
+  }
+  filter(val: any) {
+
+    this.filteredProducts = (val) ?
+      this.allProducts.filter(p => p.search.toLowerCase().includes(val.toLowerCase())) :
+      this.allProducts;
+}
 
 }

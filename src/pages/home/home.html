@@ -3,26 +3,22 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-   
-    <ion-searchbar
-  [(ngModel)]="myInput"
-  [showCancelButton]="shouldShowCancel"
-  (ionInput)="onInput($event)"
-  (ionCancel)="onCancel($event)">
-</ion-searchbar>
-<ion-buttons margin right>
-  <button ion-button icon-only>
-    <ion-icon name="cart"></ion-icon>
-  </button>
-</ion-buttons>
+
+    <ion-searchbar [showCancelButton]="shouldShowCancel" (ionInput)="filter($event.target.value)">
+    </ion-searchbar>
+    <ion-buttons margin right>
+      <button ion-button icon-only>
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
 
   </ion-navbar>
 </ion-header>
 
-<ion-content >
-  <ion-row >
-    <ion-col no-padding *ngFor="let in of ind" col-6>
-      <product-card></product-card>
+<ion-content>
+  <ion-row>
+    <ion-col no-padding *ngFor="let p of filteredProducts" col-6>
+      <product-card [product]="p"></product-card>
     </ion-col>
   </ion-row>
 </ion-content>

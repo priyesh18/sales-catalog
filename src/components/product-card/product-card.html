@@ -1,8 +1,8 @@
 <!-- Generated template for the ProductCardComponent component -->
 <ion-card class="mycard">
-    <img src="https://erconsult.com.au/wp-content/uploads/2015/04/placeholder-600x400.png"/>
+    <img [src]="product.image"/>
     <ion-card-content class="mycontent">
-      Model<br>Company<br>Type Subtype<br>Design
+      {{product.id}}<br>{{product.company}}<br>{{product.type}} {{product.subtype}}<br>{{product.description}}
       <button ion-button block>Add to order</button>
     </ion-card-content>
   </ion-card>

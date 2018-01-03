@@ -1,3 +1,6 @@
+import { environment } from './../environment/environment';
+import { CategoryService } from './../services/category.service';
+import { ProductService } from './../services/product.service';
 import { UserService } from './../services/user.service';
 import { AuthService } from './../services/auth.service';
 
@@ -7,7 +10,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,27 +23,26 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginPage } from '../pages/login/login';
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyC9eYTtyWNtxxjYNJmqPWR00q6zeCjZNMQ",
-    authDomain: "triveni-b663b.firebaseapp.com",
-    databaseURL: "https://triveni-b663b.firebaseio.com",
-    projectId: "triveni-b663b",
-    storageBucket: "triveni-b663b.appspot.com",
-    messagingSenderId: "640003599792"
-};
+// export const firebaseConfig = {
+//   apiKey: "AIzaSyC9eYTtyWNtxxjYNJmqPWR00q6zeCjZNMQ",
+//     authDomain: "triveni-b663b.firebaseapp.com",
+//     databaseURL: "https://triveni-b663b.firebaseio.com",
+//     projectId: "triveni-b663b",
+//     storageBucket: "triveni-b663b.appspot.com",
+//     messagingSenderId: "640003599792"
+// };
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     ProductCardComponent
     
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     IonicModule.forRoot(MyApp),
@@ -49,7 +51,6 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage
   ],
   providers: [
@@ -57,6 +58,8 @@ export const firebaseConfig = {
     SplashScreen,
     AuthService,
     UserService,
+    CategoryService,
+    ProductService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireDatabase
   ]

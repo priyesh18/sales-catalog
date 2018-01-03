@@ -1,22 +1,15 @@
-import { Component } from '@angular/core';
+import { Product } from './../../models/product.model';
+import { Component, Input } from '@angular/core';
 
-/**
- * Generated class for the ProductCardComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'product-card',
   templateUrl: 'product-card.html'
 })
 export class ProductCardComponent {
-
-  text: string;
+  @Input('product') product: Product;
 
   constructor() {
-    console.log('Hello ProductCardComponent Component');
-    this.text = 'Hello World';
+   
   }
 
 }
