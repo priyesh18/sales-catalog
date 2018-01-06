@@ -1,18 +1,28 @@
+import { Cart } from './../../models/cart.model';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Product } from './../../models/product.model';
 import { Component, Input } from '@angular/core';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'product-card',
   templateUrl: 'product-card.html'
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit {
   @Input('product') product: Product;
-
-  constructor() {
-   
-  }
+  cartItems
+  constructor(
+    private cartService: ShoppingCartService
+  ) {}
   addToCart(product: Product) {
-    
+    //console.log(product);
+    this.cartService.addToCart(product);
+  }
+  ngOnInit() {
+    this.cartItems = this.cartService.getCart();
+  }
+  show() {
+    console.log(this.cartItems);
   }
 
 }

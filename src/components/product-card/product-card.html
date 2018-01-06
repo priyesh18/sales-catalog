@@ -1,8 +1,20 @@
 <!-- Generated template for the ProductCardComponent component -->
 <ion-card class="mycard">
-    <img [src]="product.image"/>
-    <ion-card-content class="mycontent">
-      {{product.id}}<br>{{product.company}}<br>{{product.type}} {{product.subtype}}<br>{{product.description}}
-      <button (click)="addToCart(product)" ion-button block>Add to order</button>
-    </ion-card-content>
-  </ion-card>
+  <img [src]="product.image" />
+  <ion-card-content class="mycontent">
+    {{product.id}}
+    <br>{{product.company}}
+    <br>{{product.type}} {{product.subtype}}
+    <br>{{product.description}}
+    <br>{{product.price}}
+    <button *ngIf="!cartItems[product.$key]; else updateQuantity" (click)="addToCart(product)" ion-button block>
+      Add to order
+    </button>
+    <ng-template #updateQuantity>
+      <button>
+        <ion-input type="number" text-center [(ngModel)]="cartItems[product.$key]['quantity']" ></ion-input>
+      </button>
+      <!-- <button (click)=show() >show</button> -->
+    </ng-template>
+  </ion-card-content>
+</ion-card>

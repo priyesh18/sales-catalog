@@ -7,7 +7,7 @@
     <ion-searchbar [showCancelButton]="shouldShowCancel" (ionInput)="filter($event.target.value)">
     </ion-searchbar>
     <ion-buttons margin right>
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="goToCart()" >
         <ion-icon name="cart"></ion-icon>
       </button>
     </ion-buttons>

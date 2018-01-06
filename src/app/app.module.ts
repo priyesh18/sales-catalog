@@ -1,3 +1,4 @@
+import { CartPage } from './../pages/cart/cart';
 import { environment } from './../environment/environment';
 import { CategoryService } from './../services/category.service';
 import { ProductService } from './../services/product.service';
@@ -22,6 +23,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginPage } from '../pages/login/login';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 // export const firebaseConfig = {
 //   apiKey: "AIzaSyC9eYTtyWNtxxjYNJmqPWR00q6zeCjZNMQ",
@@ -37,8 +39,8 @@ import { LoginPage } from '../pages/login/login';
     MyApp,
     HomePage,
     LoginPage,
-    ProductCardComponent
-    
+    ProductCardComponent,
+    CartPage
   ],
   imports: [
     BrowserModule,
@@ -51,12 +53,14 @@ import { LoginPage } from '../pages/login/login';
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    CartPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthService,
+    ShoppingCartService,
     UserService,
     CategoryService,
     ProductService,
