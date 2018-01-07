@@ -11,9 +11,14 @@
       Add to order
     </button>
     <ng-template #updateQuantity>
-      <button>
-        <ion-input type="number" text-center [(ngModel)]="cartItems[product.$key]['quantity']" ></ion-input>
-      </button>
+      <ion-buttons right>
+          <button>
+              <ion-input type="number" text-center [(ngModel)]="cartItems[product.$key]['quantity']" ></ion-input>
+            </button>
+            <button ion-button icon-only (click)="delete(product.$key)"><ion-icon name="trash"></ion-icon></button>
+      </ion-buttons>
+     
+
       <!-- <button (click)=show() >show</button> -->
     </ng-template>
   </ion-card-content>

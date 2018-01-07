@@ -1,4 +1,3 @@
-import { Cart } from './../../models/cart.model';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Product } from './../../models/product.model';
 import { Component, Input } from '@angular/core';
@@ -23,6 +22,10 @@ export class ProductCardComponent implements OnInit {
   }
   show() {
     console.log(this.cartItems);
+  }
+  delete(key:string) {
+    console.log(key);
+    this.cartService.removeFromCart(key);
   }
 
 }

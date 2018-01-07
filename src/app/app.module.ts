@@ -1,3 +1,4 @@
+import { OrderService } from './../services/order.service';
 import { CartPage } from './../pages/cart/cart';
 import { environment } from './../environment/environment';
 import { CategoryService } from './../services/category.service';
@@ -61,6 +62,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
     SplashScreen,
     AuthService,
     ShoppingCartService,
+    OrderService,
     UserService,
     CategoryService,
     ProductService,

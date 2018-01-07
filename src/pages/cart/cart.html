@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+      <ion-item>
+          <ion-label text-center>Company:</ion-label>
+          <ion-input type="text" [(ngModel)]="order.company" ></ion-input>
+      </ion-item>
+    <ion-row>
+      <ion-col text-center>
+        <b>Model</b>
+      </ion-col>
+      <ion-col text-center>
+        <b>Quantity</b>
+      </ion-col>
+      <ion-col text-center>
+        <b>Price</b>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of list;let i=index" align-items-center>
+      <ion-col text-center>{{myCart[item].id}}</ion-col>
+
+      <ion-col>
+        <ion-input text-center type="number" min=1 (input)="onChange($event.target.value)"  [(ngModel)]="myCart[item].quantity"></ion-input>
+      </ion-col>
+      <ion-col text-center>  {{myCart[item].price*myCart[item].quantity | currency:'INR':true}}</ion-col>
+      <ion-item>
+          <ion-label text-center>Notes:</ion-label>
+          <ion-input type="text" [(ngModel)]="order.items[i].notes" ></ion-input>
+      </ion-item>
+      
+    </ion-row>
+    <ion-row>
+      
+      <ion-col></ion-col>
+      <ion-col text-right>Total:</ion-col>
+      <ion-col text-center>{{total | currency:'INR':true}}</ion-col>
+    </ion-row>
+
+  </ion-grid>
+<button ion-button block (click)="onPlaceOrder()">Place Order</button>
+
+</ion-content>
