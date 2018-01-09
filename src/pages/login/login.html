@@ -25,9 +25,26 @@
           <ion-input type="text" ngModel name="name"></ion-input>
         </ion-item>
       </ion-list>
-      <button ion-button type="submit"  block>submit</button>
+      <button ion-button type="submit"  block>Sign up</button>
+      
   </form>
   </ion-card>
+  <ion-card>
+    <form #ff="ngForm" (ngSubmit)="onIn(ff.value)">
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" ngModel name="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" ngModel name="password"></ion-input>
+    </ion-item>
+    
+  </ion-list>
+  <button ion-button type="submit"  block>Sign in</button>
+</form>
+</ion-card>
 
 
 

@@ -25,5 +25,7 @@ export class LoginPage {
 
     this.auth.login(data.email,data.password,data.name);
   }
-
+  onIn(data) {
+    this.auth.signIn(data.email,data.password);
+  }
 }

@@ -1,6 +1,6 @@
 <!-- Generated template for the ProductCardComponent component -->
-<ion-card class="mycard">
-  <img [src]="product.image" />
+<!-- <ion-card class="mycard">
+  <img height="200px" [src]="product.image" />
   <ion-card-content class="mycontent">
     {{product.id}}
     <br>{{product.company}}
@@ -17,9 +17,53 @@
             </button>
             <button ion-button icon-only (click)="delete(product.$key)"><ion-icon name="trash"></ion-icon></button>
       </ion-buttons>
-     
 
-      <!-- <button (click)=show() >show</button> -->
     </ng-template>
   </ion-card-content>
-</ion-card>
+</ion-card> -->
+<ion-card-content>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col>
+        <img height="200px" width="150px" [src]="product.image" />
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-grid>
+            <ion-row>
+              <b>{{product.id}}</b>
+            </ion-row>
+            <ion-row>
+              <b>{{product.company | uppercase}}</b>
+            </ion-row>
+            <ion-row>{{product.type}}</ion-row>
+            <ion-row>{{product.subtype}}</ion-row>
+            <ion-row>{{product.description}}</ion-row>
+            <ion-row>{{product.price |currency:'INR':true}}</ion-row>
+            <ion-row margin></ion-row>
+            <ion-row>
+              <button *ngIf="!cartItems[product.$key]; else updateQuantity" (click)="addToCart(product)" ion-button block>
+                Add to order
+              </button>
+              <ng-template #updateQuantity>
+                <ion-row>
+                  <ion-col>
+                    <button>
+                      <ion-input type="number" text-center [(ngModel)]="cartItems[product.$key]['quantity']"></ion-input>
+                    </button>
+                  </ion-col>
+                  <ion-col>
+                    <button color="danger" ion-button icon-only (click)="delete(product.$key)">
+                      <ion-icon name="trash"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ng-template>
+            </ion-row>
+          </ion-grid>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card-content>

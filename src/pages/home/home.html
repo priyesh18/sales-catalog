@@ -16,9 +16,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-row>
-    <ion-col no-padding *ngFor="let p of filteredProducts" col-6>
+  <ion-card *ngFor="let p of filteredProducts">
       <product-card [product]="p"></product-card>
-    </ion-col>
-  </ion-row>
+  </ion-card>
+ 
 </ion-content>
