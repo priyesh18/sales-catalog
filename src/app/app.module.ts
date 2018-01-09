@@ -25,15 +25,9 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginPage } from '../pages/login/login';
 import { ShoppingCartService } from '../services/shopping-cart.service';
+import {HttpClientModule} from '@angular/common/http';
 
-// export const firebaseConfig = {
-//   apiKey: "AIzaSyC9eYTtyWNtxxjYNJmqPWR00q6zeCjZNMQ",
-//     authDomain: "triveni-b663b.firebaseapp.com",
-//     databaseURL: "https://triveni-b663b.firebaseio.com",
-//     projectId: "triveni-b663b",
-//     storageBucket: "triveni-b663b.appspot.com",
-//     messagingSenderId: "640003599792"
-// };
+
 
 @NgModule({
   declarations: [
@@ -45,9 +39,11 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

@@ -5,6 +5,8 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { HttpClient } from '@angular/common/http/';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'page-cart',
@@ -17,6 +19,7 @@ export class CartPage {
   private total=0;
   private loader;
   private toast;
+  private uname:string;
   
   constructor(
     private cartService: ShoppingCartService,
@@ -24,6 +27,7 @@ export class CartPage {
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
     public toastCtrl: ToastController,
+    private http: HttpClient,
     private auth:AuthService) {
   }
 
@@ -31,7 +35,7 @@ export class CartPage {
     this.myCart = this.cartService.getCart();
     //console.log(this.myCart);
     this.auth.appUser$.subscribe(user => {
-      
+      this.uname = user.name;
       this.order['userName'] = user.name;
     }
     )
@@ -57,6 +61,7 @@ export class CartPage {
     this.order['orderDate'] = d.getHours()+":"+ d.getMinutes() +" "+ d.getDate()+"/"+(d.getMonth()+1);
     
     this.oService.placeOrder(this.order).then(() => {
+      this.sendNotification()
       this.loader.dismiss();
       this.presentToast();
       this.navCtrl.pop();
@@ -93,5 +98,28 @@ presentToast() {
     position: 'bottom'
   });
   this.toast.present();
+}
+sendNotification() {
+  let body = {
+    "notification":{
+      "title":"New Order Arrived",
+      "body":"New Order From "+this.uname,
+      "sound":"default",
+      "click_action":"FCM_PLUGIN_ACTIVITY",
+      "icon":"fcm_push_icon"
+    },
+    "data":{
+      "param1":"value1",
+      "param2":"value2"
+    },
+      "to":"/topics/all",
+      "priority":"high",
+      "restricted_package_name":""
+  }
+  let options = new HttpHeaders().set('Content-Type','application/json');
+  this.http.post("https://fcm.googleapis.com/fcm/send",body,{
+    headers: options.set('Authorization', 'key=AIzaSyAai1Xlpgqt5XpbVNV4j-Z_h-JaoKjavxk'),
+  })
+    .subscribe();
 }
 }
