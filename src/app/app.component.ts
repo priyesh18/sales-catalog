@@ -13,6 +13,7 @@ import { AuthService } from '../services/auth.service';
 import  firebase  from 'firebase';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import 'rxjs/add/operator/map';
+import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 @Component({
   templateUrl: 'app.html'
 })
@@ -22,6 +23,7 @@ export class MyApp implements OnInit{
   rootPage: any = LoginPage;
   pages: Array<{title: string, component: any}>;
   companys = [];
+  private loader;
   types = [
     {name: 'Steel', value: 'steel', checked: false},
     {name: 'Glass', value: 'glass', checked: false}
@@ -39,6 +41,7 @@ export class MyApp implements OnInit{
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     public events: Events,
+    private loadingCtrl: LoadingController,
     private userService: UserService,
     private menuCtrl: MenuController,
     private categoryService: CategoryService,
@@ -48,6 +51,7 @@ export class MyApp implements OnInit{
       firebase.initializeApp(environment.firebase);
   }
   auth.user$.subscribe(user => {
+    this.loader.dismiss();
     if (!user) return; 
     this.rootPage = HomePage;
     console.log(user);
@@ -63,6 +67,7 @@ export class MyApp implements OnInit{
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.presentLoading();
     });
   }
 
@@ -98,5 +103,11 @@ export class MyApp implements OnInit{
        console.log(this.companys);
      }).subscribe()
   }
-   
+  presentLoading() {
+    this.loader = this.loadingCtrl.create({
+    content: "Checking user...",
+    duration: 3000
+  });
+  this.loader.present();
+}
 }

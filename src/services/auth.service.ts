@@ -19,7 +19,7 @@ export class AuthService {
     this.user$ = afAuth.authState;    
   }
 
-  login(email: string, password: string,name: string) {
+  signup(email: string, password: string,name: string) {
    
     //this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
     this.afAuth.auth.createUserWithEmailAndPassword(email,password)
@@ -30,14 +30,16 @@ export class AuthService {
       }).then(() => {
         this.user$.subscribe(user => {
           this.userService.save(user);
+          
         } )
         
       })
+      
     })
     
   }
   signIn(email:string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email,password);
+   return this.afAuth.auth.signInWithEmailAndPassword(email,password);
   }
   logout() { 
     this.afAuth.auth.signOut();

@@ -1,31 +1,65 @@
+import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private auth: AuthService) {
+  private loader;
+  private toast;
+  constructor(
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private auth: AuthService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login() { 
-   // this.auth.login();
-  }
+  
   onSubmit(data) {
-
-    this.auth.login(data.email,data.password,data.name);
+    this.presentLoading();
+    this.auth.signup(data.email,data.password,data.name)
+  //   .then(() => {
+  //     this.loader.dismiss();
+  //   },
+  //   (err) => {
+  //     this.loader.dismiss();
+  //     this.presentToast(err);
+  //   }
+  // )
   }
   onIn(data) {
-    this.auth.signIn(data.email,data.password);
+    this.presentLoading();
+    this.auth.signIn(data.email,data.password).then(() => {
+      this.loader.dismiss();
+    },
+    (err) => {
+      this.loader.dismiss();
+      this.presentToast(err);
+    }
+  )
   }
+  presentLoading() {
+    this.loader = this.loadingCtrl.create({
+    content: "Signing you in...",
+    duration: 3000
+  });
+  this.loader.present();
+}
+presentToast(err) {
+  this.toast = this.toastCtrl.create({
+    message: err,
+    duration: 5000,
+    position: 'bottom'
+  });
+  this.toast.present();
+}
 }
