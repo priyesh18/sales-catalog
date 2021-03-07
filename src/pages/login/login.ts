@@ -23,14 +23,14 @@ export class LoginPage {
   onSubmit(data) {
     this.presentLoading();
     this.auth.signup(data.email,data.password,data.name)
-  //   .then(() => {
-  //     this.loader.dismiss();
-  //   },
-  //   (err) => {
-  //     this.loader.dismiss();
-  //     this.presentToast(err);
-  //   }
-  // )
+    .then(() => {
+      this.loader.dismiss();
+    },
+    (err) => {
+      this.loader.dismiss();
+      this.presentToast(err);
+    }
+  )
   }
   onIn(data) {
     this.presentLoading();

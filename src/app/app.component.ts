@@ -50,10 +50,11 @@ export class MyApp implements OnInit{
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
   }
+ 
   auth.user$.subscribe(user => {
-    this.loader.dismiss();
     if (!user) return; 
     this.rootPage = HomePage;
+    this.loader.dismiss();
     //userService.save(user);
   }) 
    

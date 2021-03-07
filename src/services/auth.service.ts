@@ -22,7 +22,7 @@ export class AuthService {
   signup(email: string, password: string,name: string) {
    
     //this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-    this.afAuth.auth.createUserWithEmailAndPassword(email,password)
+     return this.afAuth.auth.createUserWithEmailAndPassword(email,password)
     .then(() => {
       this.afAuth.auth.currentUser.updateProfile({
         displayName: name,
