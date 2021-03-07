@@ -21,10 +21,9 @@ export class ProductCardComponent implements OnInit {
     this.cartItems = this.cartService.getCart();
   }
   show() {
-    console.log(this.cartItems);
+    // console.log(this.cartItems);
   }
   delete(key:string) {
-    console.log(key);
     this.cartService.removeFromCart(key);
   }
 

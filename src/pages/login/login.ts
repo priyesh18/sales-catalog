@@ -19,10 +19,6 @@ export class LoginPage {
     private auth: AuthService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
   
   onSubmit(data) {
     this.presentLoading();

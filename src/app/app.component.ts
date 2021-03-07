@@ -1,4 +1,4 @@
-import { environment } from './../environment/environment';
+// import { environment } from './../environment/environment';
 import { CategoryService } from './../services/category.service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
@@ -47,14 +47,13 @@ export class MyApp implements OnInit{
     private categoryService: CategoryService,
     private auth: AuthService) {
     this.initializeApp();
-    if (!firebase.apps.length) {
-      firebase.initializeApp(environment.firebase);
-  }
+  //   if (!firebase.apps.length) {
+  //     firebase.initializeApp(environment.firebase);
+  // }
   auth.user$.subscribe(user => {
     this.loader.dismiss();
     if (!user) return; 
     this.rootPage = HomePage;
-    console.log(user);
     //userService.save(user);
   }) 
    
@@ -96,11 +95,10 @@ export class MyApp implements OnInit{
               .map(opt => opt.value)
   }
   ngOnInit() {
-     this.categoryService.getAll().map((company) => {
+     this.categoryService.getAll().map((company: Array<any>) => {
        company.forEach(element => {
         this.companys.push({name: element.name, value:element.$key, checked:false});
        });
-       console.log(this.companys);
      }).subscribe()
   }
   presentLoading() {

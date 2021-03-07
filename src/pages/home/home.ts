@@ -45,7 +45,6 @@ export class HomePage implements OnInit {
     if(companys.length == 0 ) companys = this.allCompanies;
     if(types.length == 0 ) types = this.allTypes;
     if(subtypes.length == 0 ) subtypes = this.allSubtypes;
-    //console.log(this.allCompanies,types,subtypes);
     this.filteredProducts=[];
     companys.forEach(company => {
         types.forEach(type => {

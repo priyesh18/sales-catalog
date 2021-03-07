@@ -33,14 +33,12 @@ export class CartPage {
 
   ionViewWillEnter() {
     this.myCart = this.cartService.getCart();
-    //console.log(this.myCart);
     this.auth.appUser$.subscribe(user => {
       this.uname = user.name;
       this.order['userName'] = user.name;
     }
     )
     this.list = Object.keys(this.myCart);
-    //console.log(this.list);
     this.list.forEach(item => { 
       this.order.items.push ({ 
           id: this.myCart[item].id,
@@ -66,7 +64,6 @@ export class CartPage {
       this.presentToast();
       this.navCtrl.pop();
     });
-    console.log(this.order);
   }
   
   onChange(val) {
