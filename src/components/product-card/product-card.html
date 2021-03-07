@@ -3,23 +3,23 @@
 <ion-card-content>
   <ion-grid no-padding>
     <ion-row>
-      <ion-col size="2">
+      <ion-col class="img-container">
         <img class="product-img" [src]="product.image"/>
       </ion-col>
       <ion-col>
         <ion-list>
           <ion-grid>
-            <ion-row>
-              <b>{{product.id}}</b>
+            <ion-row class="product-id">
+              {{product.id}}
             </ion-row>
-            <ion-row>
-              <b>{{product.company | uppercase}}</b>
+            <ion-row class="product-company">
+             {{product.company }}
             </ion-row>
-            <ion-row>{{product.type}}</ion-row>
-            <ion-row>{{product.subtype}}</ion-row>
-            <ion-row>{{product.description}}</ion-row>
-            <ion-row>{{product.price |currency:'INR':true}}</ion-row>
+            <ion-row class="product-details">{{product.type}} &#8226;
+          {{product.subtype}} &#8226;
+            {{product.description}}</ion-row>
             <ion-row margin></ion-row>
+            <ion-row class="product-price">{{product.price |currency:'INR':true}}</ion-row>
             <ion-row>
               <button *ngIf="!cartItems[product.$key]; else updateQuantity" (click)="addToCart(product)" ion-button block>
                 Add to order

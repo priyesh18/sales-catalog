@@ -6,11 +6,28 @@ product-card {
     margin-right: 0px;
     margin-bottom: 0px;
   }
-  .product-img {
-    height: "auto";
-    width: "150%";
-    top: 0;
-    bottom: 0;
-    margin: auto;
+  .img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    .product-img {
+      height: "auto";
+      width: "100%";
+      align-self: center;
+    }
+  }
+  .product-id {
+    color: gray;
+  }
+  .product-company {
+    font-size: x-large;
+    text-transform: capitalize;
+  }
+  .product-details {
+    color: #333;
+  }
+  .product-price {
+    font-size: large;
   }
 }

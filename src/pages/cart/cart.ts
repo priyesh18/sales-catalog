@@ -54,6 +54,10 @@ export class CartPage {
     
   }
   onPlaceOrder() {
+    if(this.total === 0) {
+      this.presentToast('Add Items to cart!');
+      return;
+    }
     this.presentLoading();
     let d = new Date();
     this.order['orderDate'] = d.getHours()+":"+ d.getMinutes() +" "+ d.getDate()+"/"+(d.getMonth()+1);
@@ -61,8 +65,9 @@ export class CartPage {
     this.oService.placeOrder(this.order).then(() => {
       this.sendNotification()
       this.loader.dismiss();
-      this.presentToast();
+      this.presentToast('Order was added successfully ');
       this.navCtrl.pop();
+      this.order = {items:[]}
     });
   }
   
@@ -88,9 +93,9 @@ export class CartPage {
     });
     this.loader.present();
 }
-presentToast() {
+presentToast(msg) {
   this.toast = this.toastCtrl.create({
-    message: 'Order was added successfully ',
+    message: msg,
     duration: 3000,
     position: 'bottom'
   });

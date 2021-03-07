@@ -1,4 +1,4 @@
-// import { environment } from './../environment/environment';
+import { firebaseConfig } from './../environment/environment';
 import { CategoryService } from './../services/category.service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
@@ -10,7 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 // import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
-// import  firebase  from 'firebase';
+import  firebase  from 'firebase';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import 'rxjs/add/operator/map';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
@@ -47,9 +47,9 @@ export class MyApp implements OnInit{
     private categoryService: CategoryService,
     private auth: AuthService) {
     this.initializeApp();
-  //   if (!firebase.apps.length) {
-  //     firebase.initializeApp(environment.firebase);
-  // }
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+  }
   auth.user$.subscribe(user => {
     this.loader.dismiss();
     if (!user) return; 
