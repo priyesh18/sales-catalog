@@ -8,9 +8,9 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { UserService } from '../services/user.service';
+// import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
-import  firebase  from 'firebase';
+// import  firebase  from 'firebase';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import 'rxjs/add/operator/map';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
@@ -42,7 +42,7 @@ export class MyApp implements OnInit{
     public splashScreen: SplashScreen,
     public events: Events,
     private loadingCtrl: LoadingController,
-    private userService: UserService,
+    // private userService: UserService,
     private menuCtrl: MenuController,
     private categoryService: CategoryService,
     private auth: AuthService) {
